@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 require('colors');
 
+// Es un array con las opciones que tendremos al iniciar el programa.
 const preguntas = [
     {
         type: 'list',
@@ -24,6 +25,8 @@ const preguntas = [
     }
 ];
 
+// con este metodo obtenemos las opciones del array de las preguntas usando un modulo descargado que se llama 
+// Inquirer que hace toda la logica para poder seleccionarlo con las flechas
 const inquirerMenu = async() => {
 
     console.clear();
@@ -50,6 +53,7 @@ const pausa = async() => {
     await inquirer.prompt(question);
 }
 
+// Con este metodo devolvemos lo que escribe el usuario tambien usando el modulo Inquirer
 const leerInput = async( message ) => {
 
     const question = [
@@ -70,6 +74,8 @@ const leerInput = async( message ) => {
     return desc;
 }
 
+// Este metodo se le pasa como parametro un array de las ciudades que recogio la llamada anterior con el termino de busqueda
+// igual usa el modulo Inquirer para que se puedan elegir las ciudades con las flechas y devuelva el id de la ciudad elegida.
 const listadoCiudades = async( lugares = [] ) => {
 
     const choices = lugares.map( (lugar, i) => {
@@ -98,53 +104,12 @@ const listadoCiudades = async( lugares = [] ) => {
 
     const { id } = await inquirer.prompt(preguntas);
     return id;
-}
+}  
 
-const confirmar = async(message) => {
-
-    const question = [
-        {
-            type: 'confirm',
-            name: 'ok',
-            message
-        }
-    ];
-
-    const { ok } = await inquirer.prompt(question);
-    return ok;
-}   
-
-const mostrarListadoChecklist = async( tareas = [] ) => {
-
-    const choices = tareas.map( (tarea, i) => {
-
-        const idx = `${i + 1}.`.green;
-
-        return {
-            value: tarea.id,
-            name:  `${ idx } ${ tarea.desc }`,
-            checked: ( tarea.completadoEn ) ? true : false
-        }
-    });
-
-    const pregunta = [
-        {
-            type: 'checkbox',
-            name: 'ids',
-            message: 'Selecciones',
-            choices
-        }
-    ]
-
-    const { ids } = await inquirer.prompt(pregunta);
-    return ids;
-}
-
+// Exportamos todas las funciones para que se puedan llamar en cualquier parte de la app
 module.exports = {
     inquirerMenu,
     pausa,
     leerInput,
-    listadoCiudades,
-    confirmar,
-    mostrarListadoChecklist
+    listadoCiudades
 }
