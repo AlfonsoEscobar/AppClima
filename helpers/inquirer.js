@@ -39,6 +39,7 @@ const inquirerMenu = async() => {
     return opcion;
 }
 
+// con este metodo nos quedamos a la espera de que el usuario pulse 'enter' para poder continuar
 const pausa = async() => {
     
     const question = [

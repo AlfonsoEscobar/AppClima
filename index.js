@@ -62,11 +62,12 @@ const main = async() => {
             break;
         }
 
+        // Si el usuario no pulsa el 0 no se saldra de la aplicacion y llamamos al metodo pausa()
         if( opt !== 0 ) await pausa();
 
     } while (opt !== 0);
 
 }
 
-
+// Llamamos a la funcion main para que funcione nuesta aplicacion
 main();
